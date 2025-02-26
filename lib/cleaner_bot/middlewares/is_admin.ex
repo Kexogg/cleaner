@@ -3,7 +3,7 @@ defmodule CleanerBot.Middlewares.IsAdmin do
   use ExGram.Middleware
   use Pathex
 
-  @creator_id 632_365_722
+  @creator_id 290_678_441
 
   @spec call(ExGram.Cnt.t(), any()) :: ExGram.Cnt.t()
   def call(%{update: %{message: message}} = context, _options) when not is_nil(message) do
