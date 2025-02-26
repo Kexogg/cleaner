@@ -10,7 +10,8 @@ config :cleaner, Cleaner.Repo,
 
 config :cleaner, Cleaner.AI.OpenAIClient,
   api_url: System.get_env("OPENAI_URL"),
-  api_key: System.get_env("OPENAI_KEY")
+  api_key: System.get_env("OPENAI_KEY"),
+  model: System.get_env("MODEL")
 
 config :cleaner, CleanerBot.Commands.NikitaCounter,
   chat_id: -1_001_997_856_608,

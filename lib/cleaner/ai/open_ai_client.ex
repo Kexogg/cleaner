@@ -15,14 +15,14 @@ defmodule Cleaner.AI.OpenAIClient do
 
   @spec completion([message()], Keyword.t()) :: {:error, any()} | {:ok, String.t(), number()}
   def completion(messages, options \\ []) do
-    model = Keyword.get(options, :model, "gpt-4o-mini")
+    model = Keyword.get(options, :model, model())
 
     body = %{
       model: model,
       messages: messages
     }
 
-    with {:ok, %{body: body}} <- post("/v1/chat/completions", body),
+    with {:ok, %{body: body}} <- post("/chat/completions", body),
          {:ok, content} <- fetch_from_body(body, path("choices" / 0 / "message" / "content")),
          {:ok, input_tokens} <- fetch_from_body(body, path("usage" / "prompt_tokens")),
          {:ok, output_tokens} <- fetch_from_body(body, path("usage" / "completion_tokens")) do
@@ -57,5 +57,11 @@ defmodule Cleaner.AI.OpenAIClient do
       |> Keyword.fetch!(:api_key)
 
     "Bearer #{token}"
+  end
+
+  defp model do
+    :cleaner
+    |> Application.get_env(__MODULE__)
+    |> Keyword.fetch!(:model)
   end
 end

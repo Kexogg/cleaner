@@ -9,5 +9,6 @@ if config_env() == :prod do
 
   config :cleaner, Cleaner.AI.OpenAIClient,
     api_url: System.get_env("OPENAI_URL", "https://api.openai.com/v1"),
-    api_key: System.fetch_env!("OPENAI_KEY")
+    api_key: System.fetch_env!("OPENAI_KEY"),
+    model: System.get_env("MODEL", "gpt-4o-mini")
 end
