@@ -11,6 +11,14 @@ defmodule Cleaner.AI.Prices do
     input_tokens * rubles_to_units(0.0432) + output_tokens * rubles_to_units(0.1728)
   end
 
+  def calculate("gemini-2.0-flash", input_tokens, output_tokens) do
+    input_tokens * rubles_to_units(0.0432) + output_tokens * rubles_to_units(0.1728)
+  end
+
+  def calculate(_, input_tokens, output_tokens) do
+    input_tokens * rubles_to_units(1) + output_tokens * rubles_to_units(0.1728)
+  end
+
   @spec units_to_rubles(integer()) :: float()
   def units_to_rubles(units) do
     units / 100_000
