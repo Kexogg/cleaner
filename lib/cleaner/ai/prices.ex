@@ -15,6 +15,7 @@ defmodule Cleaner.AI.Prices do
     input_tokens * rubles_to_units(0.0432) + output_tokens * rubles_to_units(0.1728)
   end
 
+  # credo:disable-for-next-line
   def calculate(_, input_tokens, output_tokens) do
     input_tokens * rubles_to_units(1) + output_tokens * rubles_to_units(0.1728)
   end
