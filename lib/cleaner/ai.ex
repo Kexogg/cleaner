@@ -37,12 +37,10 @@ defmodule Cleaner.AI do
 
     reply_details =
       messages
-      |> Enum.filter_map(
-           fn %ChatsStorageMessage{reply_to: reply} -> reply != nil end,
-           fn %ChatsStorageMessage{reply_to: %Params.ReplyTo{text: text}} ->
-             if text, do: "User reply: " <> text, else: "User replied to previous message"
-           end
-         )
+      |> Enum.filter(fn %ChatsStorageMessage{reply_to: reply} -> reply != nil end)
+      |> Enum.map(fn %ChatsStorageMessage{reply_to: %Params.ReplyTo{text: text}} ->
+           if text, do: "User reply: " <> text, else: "User replied to previous message"
+         end)
       |> Enum.uniq()
       |> Enum.join("\n")
 
